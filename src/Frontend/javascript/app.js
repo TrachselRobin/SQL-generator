@@ -6,7 +6,7 @@ class Database {
         this.dropDatabase = false;
         this.useDatabase = false;
     }
-    
+
     addTable(table) {
         this.tables.push(table);
     }
@@ -38,20 +38,20 @@ class Database {
     toString() {
         let sql = ""
 
-        if(this.dropDatabase) {
+        if (this.dropDatabase) {
             sql += "DROP DATABASE IF EXISTS `" + this.name + "`;\n\n";
         }
 
-        if(this.useDatabase) {
+        if (this.useDatabase) {
             sql += "USE `" + this.name + "`;\n\n";
         }
 
         sql = "CREATE DATABASE `" + this.name + "`;\n\n";
-        
-        for(let i = 0; i < this.tables.length; i++) {
+
+        for (let i = 0; i < this.tables.length; i++) {
             sql += this.tables[i].toString() + "\n\n";
         }
-        
+
         return sql;
     }
 }
@@ -61,7 +61,7 @@ class Table {
         this.name = name;
         this.columns = [];
     }
-    
+
     addColumn(column) {
         this.columns.push(column);
     }
@@ -84,19 +84,19 @@ class Table {
 
     toString() {
         let sql = "CREATE TABLE `" + this.name + "` (\n";
-        
-        for(let i = 0; i < this.columns.length; i++) {
+
+        for (let i = 0; i < this.columns.length; i++) {
             sql += "    " + this.columns[i].toString();
-            
-            if(i != this.columns.length - 1) {
+
+            if (i != this.columns.length - 1) {
                 sql += ",";
             }
-            
+
             sql += "\n";
         }
-        
+
         sql += ");";
-        
+
         return sql;
     }
 }
@@ -110,7 +110,7 @@ class Table {
     );
 */
 class Column {
-    constructor(name, type, length=null, defaultValue=null, collation=null, attribute=null, nullValue=false, autoIncrement=false, primaryKey=false, comment=null) {
+    constructor({ name, type, length = null, defaultValue = null, collation = null, attribute = null, nullValue = false, autoIncrement = false, primaryKey = false, comment = null }) {
         this.name = name;
         this.type = type;
         this.length = length;
@@ -206,40 +206,41 @@ class Column {
     toString() {
         let sql = "`" + this.name + "` " + this.type;
 
-        if(this.length != null) {
+        if (this.length != null) {
             sql += "(" + this.length + ")";
         }
-        
-        if(this.default != null) {
+
+        // Ensure only non-null, non-boolean true values are set as defaults
+        if (this.default !== null && typeof this.default !== "boolean") {
             sql += " DEFAULT " + this.default;
         }
-        
-        if(this.collation != null) {
+
+        if (this.collation != null) {
             sql += " COLLATE " + this.collation;
         }
-        
-        if(this.attribute != null) {
+
+        if (this.attribute != null) {
             sql += " " + this.attribute;
         }
-        
-        if(this.null) {
+
+        if (this.null) {
             sql += " NULL";
         } else {
             sql += " NOT NULL";
         }
-        
-        if(this.autoIncrement) {
+
+        if (this.autoIncrement) {
             sql += " AUTO_INCREMENT";
         }
-        
-        if(this.primaryKey) {
+
+        if (this.primaryKey) {
             sql += " PRIMARY KEY";
         }
-        
-        if(this.comment != null) {
+
+        if (this.comment != null) {
             sql += " COMMENT '" + this.comment + "'";
         }
-        
+
         return sql;
     }
 }
@@ -253,10 +254,14 @@ INT, VARCHAR, TEXT, DATE, TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT, DECIMAL, FL
 // testing
 let db = new Database("test");
 let table = new Table("abo");
-let column1 = new Column(name="ID", type="INTEGER", autoIncrement=true, primaryKey=true);
+// Corrected column definitions
+let column1 = new Column({ name: "ID", type: "INTEGER", autoIncrement: true, primaryKey: true });
+let column2 = new Column({ name: "name", type: "VARCHAR", length: 20 });
+let column3 = new Column({ name: "price", type: "INTEGER" });
 
 table.addColumn(column1);
-table.addColumn(new Column(name="name", type="VARCHAR", length=20));
+table.addColumn(column2);
+table.addColumn(column3);
 
 db.addTable(table);
 
