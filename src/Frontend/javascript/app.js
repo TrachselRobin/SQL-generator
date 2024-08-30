@@ -27,6 +27,14 @@ class Database {
         this.name = name;
     }
 
+    toggleDropDatabase() {
+        this.dropDatabase = !this.dropDatabase;
+    }
+
+    toggleUseDatabase() {
+        this.useDatabase = !this.useDatabase;
+    }
+
     toString() {
         let sql = ""
 
@@ -241,3 +249,15 @@ Possible types:
 
 INT, VARCHAR, TEXT, DATE, TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT, DECIMAL, FLOAT, DOUBLE, REAL, BIT, BOOLEAN, SERIAL, DATE, DATETIME, TIMESTAMP, TIME, YEAR, CHAR, VARCHAR, TINYTEXT, TEXT, MEDIUMTEXT, LONGTEXT, BINARY, VARBINARY, TINYBLOB, BLOB, MEDIUMBLOB, LONGBLOB, ENUM, SET, INET6, GEOMETRY, POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, GEOMETRYCOLLECTION, JSON
 */
+
+// testing
+let db = new Database("test");
+let table = new Table("abo");
+let column1 = new Column(name="ID", type="INTEGER", autoIncrement=true, primaryKey=true);
+
+table.addColumn(column1);
+table.addColumn(new Column(name="name", type="VARCHAR", length=20));
+
+db.addTable(table);
+
+console.log(db.toString());
