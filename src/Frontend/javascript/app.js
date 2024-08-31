@@ -1,10 +1,21 @@
-// those are the classes i have to use. I want to create an interface to create the MySQL code for me.
+class ForeignKey {
+    constructor(column, referencedTable, referencedColumn) {
+        this.column = column;
+        this.referencedTable = referencedTable;
+        this.referencedColumn = referencedColumn;
+    }
+
+    toString(tableName) {
+        return `ALTER TABLE \`${tableName}\` ADD FOREIGN KEY (\`${this.column}\`) REFERENCES \`${this.referencedTable}\` (\`${this.referencedColumn}\`);`;
+    }
+}
+
 class Database {
-    constructor(name) {
+    constructor({ name, tables = [], dropDatabase = false, useDatabase = false }) {
         this.name = name;
-        this.tables = [];
-        this.dropDatabase = false;
-        this.useDatabase = false;
+        this.tables = tables;
+        this.dropDatabase = dropDatabase;
+        this.useDatabase = useDatabase;
     }
 
     addTable(table) {
@@ -36,21 +47,28 @@ class Database {
     }
 
     toString() {
-        let sql = ""
+        let sql = "";
 
         if (this.dropDatabase) {
-            sql += "DROP DATABASE IF EXISTS `" + this.name + "`;\n\n";
+            sql += "DROP DATABASE IF EXISTS `" + this.name + "`;\n";
         }
+        
+        sql += "CREATE DATABASE `" + this.name + "`;\n\n";
 
         if (this.useDatabase) {
             sql += "USE `" + this.name + "`;\n\n";
         }
 
-        sql = "CREATE DATABASE `" + this.name + "`;\n\n";
+        // Generate table creation statements
+        let tableCreationSQL = "";
+        let foreignKeySQL = "";
 
         for (let i = 0; i < this.tables.length; i++) {
-            sql += this.tables[i].toString() + "\n\n";
+            tableCreationSQL += this.tables[i].toString() + "\n\n";
+            foreignKeySQL += this.tables[i].getForeignKeysSQL();
         }
+
+        sql += tableCreationSQL + foreignKeySQL;
 
         return sql;
     }
@@ -60,6 +78,7 @@ class Table {
     constructor(name) {
         this.name = name;
         this.columns = [];
+        this.foreignKeys = []; // List to store foreign keys
     }
 
     addColumn(column) {
@@ -68,6 +87,14 @@ class Table {
 
     removeColumn(column) {
         this.columns = this.columns.filter(c => c != column);
+    }
+
+    addForeignKey(foreignKey) {
+        this.foreignKeys.push(foreignKey);
+    }
+
+    removeForeignKey(foreignKey) {
+        this.foreignKeys = this.foreignKeys.filter(fk => fk != foreignKey);
     }
 
     getColumns() {
@@ -80,6 +107,14 @@ class Table {
 
     setName(name) {
         this.name = name;
+    }
+
+    getForeignKeysSQL() {
+        let sql = "";
+        for (let fk of this.foreignKeys) {
+            sql += fk.toString(this.name) + "\n";
+        }
+        return sql;
     }
 
     toString() {
@@ -101,14 +136,6 @@ class Table {
     }
 }
 
-/*
-    example output of toString() method:
-    CREATE TABLE abo (
-        `ID` INTEGER AUTO_INCREMENT, PRIMARY KEY (ID),
-        `name` VARCHAR(20),
-        `price` INTEGER
-    );
-*/
 class Column {
     constructor({ name, type, length = null, defaultValue = null, collation = null, attribute = null, nullValue = false, autoIncrement = false, primaryKey = false, comment = null }) {
         this.name = name;
@@ -210,7 +237,6 @@ class Column {
             sql += "(" + this.length + ")";
         }
 
-        // Ensure only non-null, non-boolean true values are set as defaults
         if (this.default !== null && typeof this.default !== "boolean") {
             sql += " DEFAULT " + this.default;
         }
@@ -245,24 +271,37 @@ class Column {
     }
 }
 
-/*
-Possible types:
+// Testing the addition of foreign keys with ALTER TABLE syntax
+let db = new Database({ name:"test", dropDatabase: true, useDatabase: true });
 
-INT, VARCHAR, TEXT, DATE, TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT, DECIMAL, FLOAT, DOUBLE, REAL, BIT, BOOLEAN, SERIAL, DATE, DATETIME, TIMESTAMP, TIME, YEAR, CHAR, VARCHAR, TINYTEXT, TEXT, MEDIUMTEXT, LONGTEXT, BINARY, VARBINARY, TINYBLOB, BLOB, MEDIUMBLOB, LONGBLOB, ENUM, SET, INET6, GEOMETRY, POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, GEOMETRYCOLLECTION, JSON
-*/
-
-// testing
-let db = new Database("test");
-let table = new Table("abo");
-// Corrected column definitions
+let table1 = new Table("abo");
 let column1 = new Column({ name: "ID", type: "INTEGER", autoIncrement: true, primaryKey: true });
 let column2 = new Column({ name: "name", type: "VARCHAR", length: 20 });
 let column3 = new Column({ name: "price", type: "INTEGER" });
+table1.addColumn(column1);
+table1.addColumn(column2);
+table1.addColumn(column3);
 
-table.addColumn(column1);
-table.addColumn(column2);
-table.addColumn(column3);
+let table2 = new Table("user_vehicle");
+let column4 = new Column({ name: "userID", type: "INTEGER" });
+let column5 = new Column({ name: "vehicle", type: "VARCHAR", length: 50 });
+table2.addColumn(column4);
+table2.addColumn(column5);
 
-db.addTable(table);
+let table3 = new Table("user");
+let column6 = new Column({ name: "ID", type: "INTEGER", autoIncrement: true, primaryKey: true });
+let column7 = new Column({ name: "name", type: "VARCHAR", length: 20 });
+table3.addColumn(column6);
+table3.addColumn(column7);
+
+// Adding a foreign key to user_vehicle using ALTER TABLE syntax
+let foreignKey1 = new ForeignKey("userID", "abo", "ID");
+table2.addForeignKey(foreignKey1);
+
+let foreignKey2 = new ForeignKey("userID", "user", "ID");
+table2.addForeignKey(foreignKey2);
+
+db.addTable(table2);
+db.addTable(table1);
 
 console.log(db.toString());
