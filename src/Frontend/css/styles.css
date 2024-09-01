@@ -1,55 +1,46 @@
 /*
-style for
+style for:
 
 <nav id="sidebar">
-            <!-- Sidebar with drop downs. like the Database can drop and show a list of all databases-->
+    <!-- Sidebar with drop downs. like the Database can drop and show a list of all databases-->
+    <ul>
+        <li><a href="#">Databases</a>
             <ul>
-                <li><a href="#">Database</a>
-                    <ul>
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Table</a>
-                    <ul>
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Column</a>
-                    <ul>
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Row</a>
-                    <ul>
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Database 1</a></li>
+                <li><a href="#">Database 2</a></li>
+                <li><a href="#">Database 3</a></li>
+                <li><a href="#">Database 4</a></li>
             </ul>
-        </nav>
+        </li>
+        <li><a href="#">Querries</a>
+            <ul>
+                <li><a href="#">Querry 1</a></li>
+                <li><a href="#">Querry 2</a></li>
+                <li><a href="#">Querry 3</a></li>
+                <li><a href="#">Querry 4</a></li>
+            </ul>
+    </ul>
+</nav>
+
+If you click on Databases, it will show a list of all databases. If you click on Querries, it will show a list of all querries.
+It should work with javascript and transition.
 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    position: fixed;
+    height: 100vh;
+}
 
 #sidebar {
-    background-color: #f8f9fa;
+    width: 200px;
+    background-color: #333;
+    padding: 10px;
     height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    overflow-x: hidden;
-    padding-top: 20px;
 }
 
 #sidebar ul {
@@ -58,47 +49,32 @@ style for
     margin: 0;
 }
 
-#sidebar ul li {
-    padding: 8px 8px 8px 16px;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #f8f9fa;
-    color: #343a40;
-}
-
-#sidebar ul li a {
-    text-decoration: none;
-    color: #343a40;
-}
-
-#sidebar ul li a:hover {
-    color: #007bff;
-}
-
-#sidebar ul li ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: none;
-}
-
-#sidebar ul li:hover ul {
+#sidebar a {
     display: block;
-}
-
-#sidebar ul li ul li {
-    padding: 8px 8px 8px 16px;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #f8f9fa;
-    color: #343a40;
-}
-
-#sidebar ul li ul li a {
+    color: #fff;
     text-decoration: none;
-    color: #343a40;
+    padding: 10px;
+    transition: background-color 0.3s;
 }
 
-#sidebar ul li ul li a:hover {
-    color: #007bff;
+#sidebar a:hover {
+    background-color: #555;
+}
+
+.dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.dropdown.open .dropdown-menu {
+    max-height: 500px; /* Set a max height to allow the transition */
+}
+
+.dropdown-menu li {
+    background-color: #444;
+}
+
+.dropdown-menu li a {
+    padding-left: 20px;
 }
