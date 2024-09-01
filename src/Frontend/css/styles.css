@@ -1,26 +1,30 @@
 /*
 style for:
 
-<nav id="sidebar">
-    <!-- Sidebar with drop downs. like the Database can drop and show a list of all databases-->
-    <ul>
-        <li><a href="#">Databases</a>
-            <ul>
-                <li><a href="#">Database 1</a></li>
-                <li><a href="#">Database 2</a></li>
-                <li><a href="#">Database 3</a></li>
-                <li><a href="#">Database 4</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Querries</a>
-            <ul>
-                <li><a href="#">Querry 1</a></li>
-                <li><a href="#">Querry 2</a></li>
-                <li><a href="#">Querry 3</a></li>
-                <li><a href="#">Querry 4</a></li>
-            </ul>
-    </ul>
-</nav>
+<header>
+    <nav id="sidebar">
+        <ul>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Databases</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Database 1</a></li>
+                    <li><a href="#">Database 2</a></li>
+                    <li><a href="#">Database 3</a></li>
+                    <li><a href="#">Database 4</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Queries</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Query 1</a></li>
+                    <li><a href="#">Query 2</a></li>
+                    <li><a href="#">Query 3</a></li>
+                    <li><a href="#">Query 4</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
 
 If you click on Databases, it will show a list of all databases. If you click on Querries, it will show a list of all querries.
 It should work with javascript and transition.
@@ -29,15 +33,18 @@ It should work with javascript and transition.
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font: 16px Arial, sans-serif;
 }
 
 header {
     position: fixed;
     height: 100vh;
+    width: 15%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 }
 
 #sidebar {
-    width: 200px;
+    width: 100%;
     background-color: #333;
     padding: 10px;
     height: 100%;
@@ -49,7 +56,11 @@ header {
     margin: 0;
 }
 
-#sidebar a {
+.dropdown {
+    margin-bottom: 10px;
+}
+
+.dropdown-menu a {
     display: block;
     color: #fff;
     text-decoration: none;
@@ -57,7 +68,7 @@ header {
     transition: background-color 0.3s;
 }
 
-#sidebar a:hover {
+.dropdown a:hover {
     background-color: #555;
 }
 
@@ -67,14 +78,74 @@ header {
     transition: max-height 0.5s ease-out;
 }
 
+.dropdown-menu li {
+    padding-left: 10px;
+}
+
 .dropdown.open .dropdown-menu {
     max-height: 500px; /* Set a max height to allow the transition */
 }
 
-.dropdown-menu li {
-    background-color: #444;
-}
-
 .dropdown-menu li a {
     padding-left: 20px;
+}
+
+.dropdown-toggle {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-toggle img {
+    width: 15px;
+    height: 15px;
+    filter: invert(1);
+}
+
+.dropdown {
+    border-top: 1px solid #555;
+}
+
+#logo {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#logo a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    width: 100%;
+}
+
+#logo a b {
+    color: rgb(0, 145, 255);
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+}
+
+main {
+    position: fixed;
+    width: 75%;
+    height: 90vh;
+    right: 5%;
+    top: 5%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
