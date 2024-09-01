@@ -1,6 +1,4 @@
-// Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all dropdown toggle elements
     document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
         toggle.addEventListener('click', function (e) {
             e.preventDefault(); // Prevent default anchor click behavior
@@ -11,3 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function addDatabase() {
+    document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
+        // toggle all elements to be closed
+        toggle.parentElement.classList.remove('open');
+    });
+
+    console.log("addDatabase");
+}
+
+function addQuerry() {
+    document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
+        // toggle all elements to be closed
+        toggle.parentElement.classList.remove('open');
+    });
+
+    console.log("addQuerry");
+}

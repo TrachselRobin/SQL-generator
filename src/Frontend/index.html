@@ -16,10 +16,16 @@
         <nav id="sidebar">
             <ul>
                 <li id="logo">
-                    <a href="#"><b>SQL</b>GEN</a>
+                    <a href="./"><b>SQL</b>GEN</a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"><img src="./images/arrow.png" alt="arrow"><p>Databases</p></a>
+                    <a href="#" class="dropdown-toggle">
+                        <div>
+                            <button onclick="addDatabase()"><img src="./images/plus.png" alt="plus"></button>
+                            <img src="./images/arrow.png" alt="arrow">
+                        </div>
+                        <p>Databases</p>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Database 1</a></li>
                         <li><a href="#">Database 2</a></li>
@@ -28,7 +34,13 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"><img src="./images/arrow.png" alt="arrow"><p>Querries</p></a>
+                    <a href="#" class="dropdown-toggle">
+                        <div>
+                            <button onclick="addQuerry()"><img src="./images/plus.png" alt="plus"></button>
+                            <img src="./images/arrow.png" alt="arrow">
+                        </div>
+                        <p>Querries</p>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Query 1</a></li>
                         <li><a href="#">Query 2</a></li>

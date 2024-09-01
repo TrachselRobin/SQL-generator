@@ -107,6 +107,20 @@ header {
     filter: invert(1);
 }
 
+.dropdown-toggle button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s;
+}
+
+.dropdown-toggle button:hover {
+    background-color: #555;
+}
+
 .dropdown {
     border-top: 1px solid #555;
 }
