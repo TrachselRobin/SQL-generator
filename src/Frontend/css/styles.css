@@ -1,0 +1,104 @@
+/*
+style for
+
+<nav id="sidebar">
+            <!-- Sidebar with drop downs. like the Database can drop and show a list of all databases-->
+            <ul>
+                <li><a href="#">Database</a>
+                    <ul>
+                        <li><a href="#">Create</a></li>
+                        <li><a href="#">Read</a></li>
+                        <li><a href="#">Update</a></li>
+                        <li><a href="#">Delete</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Table</a>
+                    <ul>
+                        <li><a href="#">Create</a></li>
+                        <li><a href="#">Read</a></li>
+                        <li><a href="#">Update</a></li>
+                        <li><a href="#">Delete</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Column</a>
+                    <ul>
+                        <li><a href="#">Create</a></li>
+                        <li><a href="#">Read</a></li>
+                        <li><a href="#">Update</a></li>
+                        <li><a href="#">Delete</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Row</a>
+                    <ul>
+                        <li><a href="#">Create</a></li>
+                        <li><a href="#">Read</a></li>
+                        <li><a href="#">Update</a></li>
+                        <li><a href="#">Delete</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+*/
+
+#sidebar {
+    background-color: #f8f9fa;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar ul li {
+    padding: 8px 8px 8px 16px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #343a40;
+}
+
+#sidebar ul li a:hover {
+    color: #007bff;
+}
+
+#sidebar ul li ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+#sidebar ul li:hover ul {
+    display: block;
+}
+
+#sidebar ul li ul li {
+    padding: 8px 8px 8px 16px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+#sidebar ul li ul li a {
+    text-decoration: none;
+    color: #343a40;
+}
+
+#sidebar ul li ul li a:hover {
+    color: #007bff;
+}
