@@ -107,6 +107,15 @@ header {
     filter: invert(1);
 }
 
+.arrow {
+    transform: rotate(0deg);
+    transition: transform 0.3s;
+}
+
+.open-arrow {
+    transform: rotate(180deg);
+}
+
 .dropdown-toggle button {
     background-color: transparent;
     border: none;
