@@ -60,15 +60,19 @@ header {
     margin-bottom: 10px;
 }
 
-.dropdown-menu a {
+.dropdown-menu button {
     display: block;
     color: #fff;
     text-decoration: none;
+    background-color: #333;
+    text-align: left;
+    border: none;
+    width: 100%;
     padding: 10px;
     transition: background-color 0.3s;
 }
 
-.dropdown a:hover {
+.dropdown button:hover {
     background-color: #555;
 }
 
@@ -86,7 +90,7 @@ header {
     max-height: 500px; /* Set a max height to allow the transition */
 }
 
-.dropdown-menu li a {
+.dropdown-menu li button {
     padding-left: 20px;
 }
 
@@ -161,6 +165,60 @@ body {
     display: flex;
 }
 
+/*
+style for:
+<main>
+        <form action="">
+            <!-- form for all the columns 
+                constructor({ name, type, length = null, defaultValue = null, collation = null, attribute = null, nullValue = false, autoIncrement = false, primaryKey = false, comment = null }) {
+                    this.name = name;
+                    this.type = type;
+                    this.length = length;
+                    this.default = defaultValue;
+                    this.collation = collation;
+                    this.attribute = attribute;
+                    this.null = nullValue;
+                    this.autoIncrement = autoIncrement;
+                    this.primaryKey = primaryKey;
+                    this.comment = comment;
+                } 
+            -->
+            
+            <table>
+                <tr>
+                    <th>Column Name</th>
+                    <th>Type</th>
+                    <th>Length</th>
+                    <th>Default</th>
+                    <th>Collation</th>
+                    <th>Attribute</th>
+                    <th>Null</th>
+                    <th>Auto Increment</th>
+                    <th>Primary Key</th>
+                    <th>Comment</th>
+                </tr>
+                <tr class="column">
+                    <td><input type="text" name="name" id="name"></td>
+                    <td>
+                        <select name="type" id="type">
+                            
+                        </select>
+                    </td>
+                    <td><input type="text" name="length" id="length"></td>
+                    <td><input type="text" name="default" id="default"></td>
+                    <td><input type="text" name="collation" id="collation"></td>
+                    <td><input type="text" name="attribute" id="attribute"></td>
+                    <td><input type="checkbox" name="null" id="null"></td>
+                    <td><input type="checkbox" name="autoIncrement" id="autoIncrement"></td>
+                    <td><input type="checkbox" name="primaryKey" id="primaryKey"></td>
+                    <td><input type="text" name="comment" id="comment"></td>
+                </tr>
+            </table>
+            <button type="button" onclick="addColumn()">Add Column</button>
+        </form>
+    </main>
+*/
+
 main {
     position: fixed;
     width: 75%;
@@ -171,4 +229,69 @@ main {
     background-color: #f4f4f4;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font: 24px Arial, sans-serif;
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 10px;
+    margin-top: 50px;
+    text-align: center;
+    font: 20px Arial, sans-serif;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #d9d9d9;
+    color: #000000;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.column input[type="text"],
+.column select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.column input[type="checkbox"] {
+    width: 100%;
+    height: 20px;
+}
+main > form > button {
+    padding: 20px;
+    margin-top: 10px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+}
+
+main > form > button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+main > form > button:last-child:hover {
+    background-color: rgba(0, 255, 76, 0.1);
 }

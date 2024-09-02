@@ -20,22 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function addDatabase() {
-    document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
-        toggleDropdownPlus(toggle);
-    });
-
-    console.log("addDatabase");
-}
-
-function addQuerry() {
-    document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
-        toggleDropdownPlus(toggle);
-    });
-
-    console.log("addQuerry");
-}
-
 function toggleDropdown(element) {
     // Toggle the 'open' class on the parent .dropdown element
     const dropdown = element.parentElement;

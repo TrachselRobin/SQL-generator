@@ -26,33 +26,32 @@
                         </div>
                         <p>Databases</p>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Database 1</a></li>
-                        <li><a href="#">Database 2</a></li>
-                        <li><a href="#">Database 3</a></li>
-                        <li><a href="#">Database 4</a></li>
+                    <ul id="databases" class="dropdown-menu">
+                        <li><button onclick="loadDatabase(0)">Database 1</button></li>
+                        <li><button onclick="loadDatabase(1)">Database 2</button></li>
+                        <li><button onclick="loadDatabase(2)">Database 3</button></li>
+                        <li><button onclick="loadDatabase(3)">Database 4</button></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">
                         <div>
-                            <button onclick="addQuerry()"><img src="./images/plus.png" alt="plus"></button>
+                            <button onclick="addQuery()"><img src="./images/plus.png" alt="plus"></button>
                             <img class="arrow" src="./images/arrow.png" alt="arrow">
                         </div>
-                        <p>Querries</p>
+                        <p>Queries</p>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Query 1</a></li>
-                        <li><a href="#">Query 2</a></li>
-                        <li><a href="#">Query 3</a></li>
-                        <li><a href="#">Query 4</a></li>
+                    <ul id="queries" class="dropdown-menu">
+                        <li><button onclick="loadQuery(0)">Query 1</button></li>
+                        <li><button onclick="loadQuery(1)">Query 2</button></li>
+                        <li><button onclick="loadQuery(2)">Query 3</button></li>
+                        <li><button onclick="loadQuery(3)">Query 4</button></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        
     </main>
 </body>
 

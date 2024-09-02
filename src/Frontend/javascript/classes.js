@@ -271,7 +271,7 @@ class Column {
     }
 }
 
-// Testing the addition of foreign keys with ALTER TABLE syntax
+/* Testing the addition of foreign keys with ALTER TABLE syntax
 let db = new Database({ name:"test", dropDatabase: true, useDatabase: true });
 
 let table1 = new Table("abo");
@@ -305,3 +305,4 @@ db.addTable(table2);
 db.addTable(table1);
 
 console.log(db.toString());
+*/
