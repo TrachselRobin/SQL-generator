@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="javascript/classes.js"></script>
+    <title>Database Query Interface</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            width: 20%;
+            background-color: #f0f0f0;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        #main {
+            width: 80%;
+            padding: 20px;
+        }
+        .query-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .table-item {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .column-item {
+            margin-bottom: 5px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            margin: 5px 0;
+        }
+        input, select {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <h2>Queries</h2>
+        <div id="queryList">
+            <!-- Query items will be dynamically added here -->
+        </div>
+        <button id="addQueryBtn">Add Query</button>
+    </div>
+
+    <div id="main">
+        <h2 id="queryTitle">Query Details</h2>
+        <div id="queryDetails">
+            <!-- Query details will be dynamically added here -->
+        </div>
+        <button id="saveQueryBtn">Save Query</button>
+    </div>
+
+    <script>
+        // Example Queries Array
+        let queries = [
+            new Query({ name: 'TestDB', dropDatabase: true, useDatabase: true })
+        ];
+        let selectedQueryIndex = null;
+
+        document.getElementById('addQueryBtn').addEventListener('click', () => {
+            const newQuery = new Query({ name: 'NewQuery' });
+            queries.push(newQuery);
+            renderQueryList();
+        });
+
+        document.getElementById('saveQueryBtn').addEventListener('click', () => {
+            if (selectedQueryIndex !== null) {
+                const query = queries[selectedQueryIndex];
+                alert(query.toString());
+            }
+        });
+
+        function renderQueryList() {
+            const queryList = document.getElementById('queryList');
+            queryList.innerHTML = '';
+            queries.forEach((query, index) => {
+                const queryItem = document.createElement('div');
+                queryItem.className = 'query-item';
+                queryItem.textContent = query.getName();
+                queryItem.onclick = () => {
+                    selectedQueryIndex = index;
+                    renderQueryDetails(query);
+                };
+                queryList.appendChild(queryItem);
+            });
+        }
+
+        function renderQueryDetails(query) {
+            const queryDetails = document.getElementById('queryDetails');
+            queryDetails.innerHTML = `
+                <label>Query Name: <input type="text" value="${query.getName()}" onchange="queries[selectedQueryIndex].setName(this.value)" /></label>
+                <label>Drop Database: <input type="checkbox" ${query.dropDatabase ? 'checked' : ''} onchange="queries[selectedQueryIndex].toggleDropDatabase()" /></label>
+                <label>Use Database: <input type="checkbox" ${query.useDatabase ? 'checked' : ''} onchange="queries[selectedQueryIndex].toggleUseDatabase()" /></label>
+                <button onclick="addTable()">Add Table</button>
+                <div id="tablesContainer"></div>
+            `;
+            renderTables(query);
+        }
+
+        function renderTables(query) {
+            const tablesContainer = document.getElementById('tablesContainer');
+            tablesContainer.innerHTML = '';
+            query.getTables().forEach((table, tableIndex) => {
+                const tableItem = document.createElement('div');
+                tableItem.className = 'table-item';
+                tableItem.innerHTML = `
+                    <label>Table Name: <input type="text" value="${table.getName()}" onchange="queries[selectedQueryIndex].tables[${tableIndex}].setName(this.value)" /></label>
+                    <button onclick="addColumn(${tableIndex})">Add Column</button>
+                    <div id="columnsContainer${tableIndex}"></div>
+                `;
+                tablesContainer.appendChild(tableItem);
+                renderColumns(table, tableIndex);
+            });
+        }
+
+        function renderColumns(table, tableIndex) {
+            const columnsContainer = document.getElementById(`columnsContainer${tableIndex}`);
+            columnsContainer.innerHTML = '';
+            table.getColumns().forEach((column, columnIndex) => {
+                const columnItem = document.createElement('div');
+                columnItem.className = 'column-item';
+                columnItem.innerHTML = `
+                    <input type="text" value="${column.getName()}" onchange="queries[selectedQueryIndex].tables[${tableIndex}].columns[${columnIndex}].setName(this.value)" placeholder="Column Name" />
+                    <input type="text" value="${column.getType()}" onchange="queries[selectedQueryIndex].tables[${tableIndex}].columns[${columnIndex}].setType(this.value)" placeholder="Column Type" />
+                    <input type="checkbox" ${column.getPrimaryKey() ? 'checked' : ''} onchange="queries[selectedQueryIndex].tables[${tableIndex}].columns[${columnIndex}].setPrimaryKey(this.checked)" /> Primary Key
+                `;
+                columnsContainer.appendChild(columnItem);
+            });
+        }
+
+        function addTable() {
+            const newTable = new Table('NewTable');
+            queries[selectedQueryIndex].addTable(newTable);
+            renderTables(queries[selectedQueryIndex]);
+        }
+
+        function addColumn(tableIndex) {
+            const newColumn = new Column({ name: 'NewColumn', type: 'VARCHAR', length: 255 });
+            queries[selectedQueryIndex].tables[tableIndex].addColumn(newColumn);
+            renderColumns(queries[selectedQueryIndex].tables[tableIndex], tableIndex);
+        }
+
+        // Initial render
+        renderQueryList();
+    </script>
+
+</body>
+</html>

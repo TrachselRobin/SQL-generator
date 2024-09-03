@@ -10,7 +10,7 @@ class ForeignKey {
     }
 }
 
-class Database {
+class Query {
     constructor({ name, tables = [], dropDatabase = false, useDatabase = false }) {
         this.name = name;
         this.tables = tables;
@@ -44,6 +44,18 @@ class Database {
 
     toggleUseDatabase() {
         this.useDatabase = !this.useDatabase;
+    }
+
+    getAllPrimaryKeys() {
+        let primaryKeys = [];
+        for (let table of this.tables) {
+            for (let column of table.getColumns()) {
+                if (column.getPrimaryKey()) {
+                    primaryKeys.push(column.getName());
+                }
+            }
+        }
+        return primaryKeys;
     }
 
     toString() {
@@ -107,6 +119,11 @@ class Table {
 
     setName(name) {
         this.name = name;
+    }
+
+    getSize() {
+        // count all characters that the toString() method returns for the whole table
+        return this.toString().length;
     }
 
     getForeignKeysSQL() {
@@ -195,7 +212,7 @@ class Column {
     }
 
     setType(type) {
-        this.type = type;
+        this.type = type.toUpperCase();
     }
 
     setLength(length) {
@@ -272,7 +289,7 @@ class Column {
 }
 
 /* Testing the addition of foreign keys with ALTER TABLE syntax
-let db = new Database({ name:"test", dropDatabase: true, useDatabase: true });
+let db = new Query({ name:"test", dropDatabase: true, useDatabase: true });
 
 let table1 = new Table("abo");
 let column1 = new Column({ name: "ID", type: "INTEGER", autoIncrement: true, primaryKey: true });

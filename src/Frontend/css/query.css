@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* <div id="queries">
+            <h1>Query 1</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Columns</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#"></a>Table 1</td>
+                        <td>5</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr>
+                        <td>Table 2</td>
+                        <td>3</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td>Table 3</td>
+                        <td>7</td>
+                        <td>2000</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1>Query 2</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Columns</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Table 1</td>
+                        <td>5</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr>
+                        <td>Table 2</td>
+                        <td>3</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td>Table 3</td>
+                        <td>7</td>
+                        <td>2000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> */
+
+#queries {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+#queries h1 {
+    margin: 20px 0;
+}
+
+#queries table {
+    width: 80%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+#queries table > thead {
+    background-color: #f1f1f1;
+}
+
+#queries table > thead > tr > th {
+    padding: 10px;
+    text-align: left;
+}
+
+#queries table > tbody > tr > td {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+#queries table > tbody > tr > td > a:hover {
+    color: black;
+}
+
+main {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 5vw;
+    background-color: aliceblue;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+main > div {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+main > div:first-child {
+    border-right: 1px solid #ccc;
+}
+
+#output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#codeWindow {
+    height: 97%;
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-y: scroll;
+}
