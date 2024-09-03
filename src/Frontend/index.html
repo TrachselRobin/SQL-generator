@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <script src="javascript/app.js"></script>
-    <script src="javascript/classes.js"></script>
-    <script src="javascript/style.js"></script>
+    <script src="javascript/classes.js" defer></script>
+    <script src="javascript/app.js" defer></script>
+    <script src="javascript/style.js" defer></script>
     <title>SQL-Generator | Home</title>
 </head>
 
@@ -26,12 +26,7 @@
                         </div>
                         <p>Databases</p>
                     </a>
-                    <ul id="databases" class="dropdown-menu">
-                        <li><button onclick="loadDatabase(0)">Database 1</button></li>
-                        <li><button onclick="loadDatabase(1)">Database 2</button></li>
-                        <li><button onclick="loadDatabase(2)">Database 3</button></li>
-                        <li><button onclick="loadDatabase(3)">Database 4</button></li>
-                    </ul>
+                    <ul id="databases" class="dropdown-menu"></ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">
@@ -41,12 +36,7 @@
                         </div>
                         <p>Queries</p>
                     </a>
-                    <ul id="queries" class="dropdown-menu">
-                        <li><button onclick="loadQuery(0)">Query 1</button></li>
-                        <li><button onclick="loadQuery(1)">Query 2</button></li>
-                        <li><button onclick="loadQuery(2)">Query 3</button></li>
-                        <li><button onclick="loadQuery(3)">Query 4</button></li>
-                    </ul>
+                    <ul id="queries" class="dropdown-menu"></ul>
                 </li>
             </ul>
         </nav>
