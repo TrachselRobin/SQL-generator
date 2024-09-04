@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="javascript/classes.js" defer></script>
+    <script src="javascript/app.js" defer></script>
+    <script src="javascript/style.js" defer></script>
+    <title>SQL-Generator | Home</title>
+</head>
+
+<body>
+    <header>
+        <nav id="sidebar">
+            <ul>
+                <li id="logo">
+                    <a href="./"><b>SQL</b>GEN</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <div>
+                            <button onclick="addDatabase()"><img src="./images/plus.png" alt="plus"></button>
+                            <img class="arrow" src="./images/arrow.png" alt="arrow">
+                        </div>
+                        <p>Databases</p>
+                    </a>
+                    <ul id="databases" class="dropdown-menu"></ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <div>
+                            <button onclick="addQuery()"><img src="./images/plus.png" alt="plus"></button>
+                            <img class="arrow" src="./images/arrow.png" alt="arrow">
+                        </div>
+                        <p>Queries</p>
+                    </a>
+                    <ul id="queries" class="dropdown-menu"></ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    </main>
+</body>
+
+</html>
